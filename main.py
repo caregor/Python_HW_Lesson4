@@ -8,14 +8,16 @@
 3. Задайте последовательность чисел. Напишите программу, которая выведет список неповторяющихся элементов исходной
 последовательности.
 
-Задана натуральная степень k. Сформировать случайным образом список коэффициентов (значения от 0 до 100) многочлена и записать в файл многочлен степени k.
-
+4. Задана натуральная степень k. Сформировать случайным образом список коэффициентов (значения от 0 до 100)
+многочлена и записать в файл многочлен степени k.
 Пример:
+    - k=2 => 2*x² + 4*x + 5 = 0 или x² + 5 = 0 или 10*x² = 0
 
-- k=2 => 2*x² + 4*x + 5 = 0 или x² + 5 = 0 или 10*x² = 0
-Даны два файла, в каждом из которых находится запись многочлена. Задача - сформировать файл, содержащий сумму многочленов.
+5. Даны два файла, в каждом из которых находится запись многочлена. Задача - сформировать файл, содержащий сумму многочленов.
 """
-#Задача №1
+import random
+
+# Задача №1
 # import math
 #
 # d = list(input('Enter d=: ').split('.'))
@@ -33,7 +35,7 @@
 # print('Вычисление по ряду Лейбница:   ', round(result, capacity))
 # print('Использование библиотеки math: ', round(math.pi, capacity))
 
-#Задача №2
+# Задача №2
 # n = int(input('Enter number: '))
 # i = 2
 # result = []
@@ -46,6 +48,25 @@
 #     result.append(int(n))
 # print(result)
 
-data = list(map(int, input().split()))
-print('Source list                  ', data)
-print('List with unique elements    ', list(set(data)))
+# №задача №3
+# data = list(map(int, input().split()))
+# print('Source list                  ', data)
+# print('List with unique elements    ', list(set(data)))
+
+# Задача №4
+result = ''
+k = int(input('K= '))
+count = list(random.randint(1, 100) for x in range(0, k + 1))
+
+for item in count:
+    if item != 0:
+        tmp = str(item)
+        if k > 1:
+            tmp = tmp + 'X*' + str(k)
+        elif k == 1:
+            tmp = tmp + 'X'
+        result += tmp + '+'
+
+    k -= 1
+with open('result.txt', 'w') as f:
+    f.write(result[:-1] + '=0')

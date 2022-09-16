@@ -71,96 +71,99 @@ import re
 #     k -= 1
 # with open('result.txt', 'w') as f:
 #     f.write(result[:-1] + '=0')
-
-with open('01', 'r') as f1:
-    source1 = f1.read()
-with open('02', 'r') as f2:
-    source2 = f2.read()
-
-if source1[:1] != '-':
-    source1 = '+' + source1
-if source2[:1] != '-':
-    source2 = '+' + source2
-print(source1)
-print(source2)
-def split_pol(source):
-    result = []
-    s = source.replace(' ', '')
-    result.append(re.findall(r'\d{1,}X..\d', s))
-    some = re.findall(r'\d{1,}X[+-]', s)
-    result.append(some[0][:-1])
-    result.append(re.findall(r'[+-]\d{1,}', s))
-    return result
-
-tmp_list =[]
-pow_list1 = []
-pow_list2 = []
-total = []
-#total_action = []
-result1 = split_pol(source1)
-result2 = split_pol(source2)
-print(result1)
-print(result2)
-for i in split_pol(source1)[0]:
-    tmp_list.append(i[-1:])
-    pow_list1.append(i[-1:])
-
-for j in split_pol(source2)[0]:
-    tmp_list.append(j[-1:])
-    pow_list2.append(j[-1:])
-
-uniq_pow = list(set(tmp_list))
-
-for el in uniq_pow:
-    if el not in pow_list1:
-        result1[0].append('0X**'+ el)
-        index = result1[0].index('0X**'+ el)
-        result1[2].insert(index,'+0')
-
-
-for el in uniq_pow:
-    if el not in pow_list2:
-        result2[0].append('0X**'+ el)
-        result2[2].append('+0')
-
-
-len_s1 = len(result1)
-len_s2 = len(result2)
-
-if len_s1 < len_s2:
-    result1.insert(1, '0X')
-elif len_s1 > len_s2:
-    result2.insert(1, '0X')
-if len(result1[0]) < len(result2[0]):
-    result2[0].append()
-
-result1_mod = result1[0]
-result1_mod.append(result1[1])
-print('mod',result1_mod)
-result2_mod = result2[0]
-result2_mod.append(result2[1])
-print('mod',result2_mod)
-for i in result1_mod:
-    for j in result2_mod:
-        if i[-1:] == j[-1:]:
-            tmp = i.split('X')
-            index1 = result1_mod.index(i)
-            index2 = result2_mod.index(j)
-            calc = int(result1[2][index1]) + int(result2[2][index2])
-            res = str(calc) + 'X' + tmp[1]
-            total.append(res)
-
-numbers = int(result1[2].pop()) + int(result2[2].pop())
-total.append(str(numbers))
-print(total)
-final_result = ''
-for el in total:
-    if el[:1] != '-':
-        if el[:1] != '0':
-            final_result += el + '+'
-    else:
-        final_result = final_result[:-1]
-        final_result += el + '+'
-
-with open('result.txt', 'w') as file:
-    file.write(final_result[:-1]+'=0')
+# Задача №5
+# with open('01', 'r') as f1:
+#     source1 = f1.read()
+# with open('02', 'r') as f2:
+#     source2 = f2.read()
+#
+# if source1[:1] != '-':
+#     source1 = '+' + source1
+# if source2[:1] != '-':
+#     source2 = '+' + source2
+#
+#
+# def split_pol(source):
+#     result = []
+#     s = source.replace(' ', '')
+#     result.append(re.findall(r'\d{1,}X..\d', s))
+#     some = re.findall(r'\d{1,}X[+-]', s)
+#     result.append(some[0][:-1])
+#     result.append(re.findall(r'[+-]\d{1,}', s))
+#     return result
+#
+# tmp_list = []
+# pow_list1 = []
+# pow_list2 = []
+# total = []
+#
+# splited_str1 = split_pol(source1)
+# splited_str2 = split_pol(source2)
+#
+#
+# for i in split_pol(source1)[0]:
+#     tmp_list.append(i[-1:])
+#     pow_list1.append(i[-1:])
+#
+# for j in split_pol(source2)[0]:
+#     tmp_list.append(j[-1:])
+#     pow_list2.append(j[-1:])
+#
+# uniq_pow = list(set(tmp_list))
+#
+# for el in uniq_pow:
+#     if el not in pow_list1:
+#         splited_str1[0].append('0X**' + el)
+#         index = splited_str1[0].index('0X**' + el)
+#         splited_str1[2].insert(index, '+0')
+#
+#
+# for el in uniq_pow:
+#     if el not in pow_list2:
+#         splited_str2[0].append('0X**' + el)
+#         index = splited_str2[0].index('0X**' + el)
+#         splited_str2[2].insert(index, '+0')
+#
+#
+# len_s1 = len(splited_str1)
+# len_s2 = len(splited_str2)
+#
+# if len_s1 < len_s2:
+#     splited_str1.insert(1, '0X')
+# elif len_s1 > len_s2:
+#     splited_str2.insert(1, '0X')
+# if len(splited_str1[0]) < len(splited_str2[0]):
+#     splited_str2[0].append()
+#
+# splited_str1_mod = splited_str1[0]
+# splited_str1_mod.append(splited_str1[1])
+#
+# splited_str2_mod = splited_str2[0]
+# splited_str2_mod.append(splited_str2[1])
+#
+# for i in splited_str1_mod:
+#     for j in splited_str2_mod:
+#         if i[-1:] == j[-1:]:
+#             tmp = i.split('X')
+#             index1 = splited_str1_mod.index(i)
+#             index2 = splited_str2_mod.index(j)
+#             calc = int(splited_str1[2][index1]) + int(splited_str2[2][index2])
+#             res = str(calc) + 'X' + tmp[1]
+#             total.append(res)
+#
+# odds_without_x = int(splited_str1[2].pop()) + int(splited_str2[2].pop())
+# total.append(str(odds_without_x))
+#
+# final_result = ''
+# for el in total:
+#     if el[:1] != '-':
+#         if el[:1] != '0':
+#             final_result += el + '+'
+#
+#     else:
+#         final_result = final_result[:-1]
+#         final_result += el + '+'
+#
+#
+# with open('result.txt', 'w') as file:
+#     file.write(final_result[:-1]+'=0')

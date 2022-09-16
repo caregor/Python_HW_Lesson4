@@ -18,7 +18,7 @@
 import random
 import re
 
-# Задача №1
+# #Задача №1
 # import math
 #
 # d = list(input('Enter d=: ').split('.'))
@@ -36,7 +36,7 @@ import re
 # print('Вычисление по ряду Лейбница:   ', round(result, capacity))
 # print('Использование библиотеки math: ', round(math.pi, capacity))
 
-# Задача №2
+# #Задача №2
 # n = int(input('Enter number: '))
 # i = 2
 # result = []
@@ -49,12 +49,12 @@ import re
 #     result.append(int(n))
 # print(result)
 
-# №задача №3
+# #задача №3
 # data = list(map(int, input().split()))
 # print('Source list                  ', data)
 # print('List with unique elements    ', list(set(data)))
 
-# Задача №4
+# #Задача №4
 # result = ''
 # k = int(input('K= '))
 # count = list(random.randint(1, 100) for x in range(0, k + 1))
@@ -71,6 +71,7 @@ import re
 #     k -= 1
 # with open('result.txt', 'w') as f:
 #     f.write(result[:-1] + '=0')
+
 # Задача №5
 # with open('01', 'r') as f1:
 #     source1 = f1.read()
